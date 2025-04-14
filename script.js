@@ -164,7 +164,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Add placeholders for renderWeek2, 3, 4, 5, 6, and renderMyPlan ---
-    function renderWeek2() { mainContent.innerHTML = `<div class="content-section"><h2>Week 2 Coming Soon...</h2></div>`; }
+    function renderWeek2() {
+        // Retrieve relevant Week 1 data to display for context, if needed
+        const week1Values = appData.week1?.coreValues || 'Not yet defined.';
+        const week1People = appData.week1?.keyPeople || 'Not yet defined.';
+        const week1Why = appData.week1?.primaryWhy || 'Not yet defined.';
+    
+        mainContent.innerHTML = `
+            <div class="content-section">
+                <h2>Week 2: Identifying Your Priorities (Solidifying & Envisioning)</h2>
+                <h3>Focus:</h3>
+                <p>Reviewing, confirming, and deepening understanding of Week 1 priorities. Envisioning what living these priorities looks like.</p>
+    
+                <h3>Activities:</h3>
+                <ol>
+                    <li>
+                        <strong>Review & Refine:</strong> Re-read your entries from Week 1 below. Go back to the <a href="#week1" class="nav-link" data-section="week1">Week 1 section</a> to adjust if needed.
+                        <div style="background-color: #f9f9f9; border-left: 3px solid var(--primary-color); padding: 10px; margin-top: 10px; font-size: 0.9em;">
+                            <p><strong>From Week 1 - Values/Principles (What):</strong><br>${week1Values.replace(/\n/g, '<br>')}</p>
+                            <p><strong>From Week 1 - Key People (Who):</strong><br>${week1People.replace(/\n/g, '<br>')}</p>
+                            <p><strong>From Week 1 - Why Paramount:</strong><br>${week1Why.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Articulate the 'Why':</strong> For each primary priority identified in Week 1, expand on <em>why</em> it's truly crucial. Deepen your conviction.
+                        <label for="w2-why-crucial" style="margin-top: 10px; display: block;">Why are these priorities crucial?</label>
+                        <textarea id="w2-why-crucial" data-week="week2" data-field="priorityWhyCrucial">${appData.week2?.priorityWhyCrucial || ''}</textarea>
+                    </li>
+                    <li>
+                        <strong>Envision the Ideal:</strong> Brainstorm: What would it <em>look like</em> to fully live these priorities? What specific activities would you be doing? How would you <em>feel</em>? (Capture detailed notes).
+                        <label for="w2-ideal-vision" style="margin-top: 10px; display: block;">Your Ideal Vision (Activities, Feelings):</label>
+                        <textarea id="w2-ideal-vision" data-week="week2" data-field="idealVision">${appData.week2?.idealVision || ''}</textarea>
+                    </li>
+                </ol>
+    
+                <h3>Reflection Prompt:</h3>
+                <p>How did solidifying the 'why' strengthen conviction? Did envisioning the 'ideal state' and key priorities bring clarity?</p>
+                <label for="w2-reflection">Your Reflection:</label>
+                <textarea id="w2-reflection" data-reflection="week2">${appData.reflections?.week2 || ''}</textarea>
+    
+                <h3>Contemplate Before Next Week:</h3>
+                <p>With your refined priorities and vision now clearer, prepare yourself to face your <em>current</em> reality without judgment. Decide which method you'll use for detailed time tracking next week (app, notebook, spreadsheet). Mentally commit to the process of honest observation.</p>
+            </div>`;
+    
+        // Add event listeners for the new textareas to save data on blur
+        addSaveListeners('week2');
+    
+        // Add event listener for the internal nav link (needed because we replace innerHTML)
+         const internalNavLink = mainContent.querySelector('.nav-link[data-section="week1"]');
+         if (internalNavLink) {
+             internalNavLink.addEventListener('click', handleNavClick);
+         }
+    }
     function renderWeek3() { mainContent.innerHTML = `<div class="content-section"><h2>Week 3 Coming Soon...</h2></div>`; }
     function renderWeek4() { mainContent.innerHTML = `<div class="content-section"><h2>Week 4 Coming Soon...</h2></div>`; }
     function renderWeek5() { mainContent.innerHTML = `<div class="content-section"><h2>Week 5 Coming Soon...</h2></div>`; }
