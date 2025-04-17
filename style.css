@@ -159,6 +159,15 @@ button.save-button:hover {
     max-width: 100px; /* Prevent input from getting too wide */
 }
 
+.probing-question {
+    margin-bottom: 1.5rem; /* Add space between questions */
+}
+.probing-question label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
 
 footer {
     text-align: center;

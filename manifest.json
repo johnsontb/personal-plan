@@ -1,7 +1,7 @@
 {
-    "name": "Personal Plan Curriculum",
+    "name": "Personal Plan Journey",
     "short_name": "PlanApp",
-    "description": "A PWA to guide users through the 6-week Personal Planning Curriculum.",
+    "description": "A PWA to guide users through the 6-week Personal Planning Process.", 
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
